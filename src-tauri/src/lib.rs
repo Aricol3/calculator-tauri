@@ -5,18 +5,20 @@
 
 use tauri::Manager;
 use window_vibrancy::*;
+extern crate meval;
 
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+fn evaluate_expression(expression: &str) -> String {
+    let r = meval::eval_str(expression).unwrap();
+    format!("{}", r)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![evaluate_expression])
         .setup(|app| {
                     let window = app.get_webview_window("main").unwrap();
 
