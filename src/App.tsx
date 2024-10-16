@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="container flex flex-col gap-4">
         <ButtonGroup size="lg">
           <Button>7</Button>
           <Button>8</Button>
