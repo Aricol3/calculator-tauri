@@ -13,8 +13,9 @@
     "windows": [
       {
         "title": "calculator",
-        "width": 800,
-        "height": 600,
+        "width": 340,
+        "height": 380,
+        "resizable": true,
         "transparent": true,
         "decorations": false
       }

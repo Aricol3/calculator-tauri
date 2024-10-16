@@ -7,11 +7,12 @@ use tauri::Manager;
 use window_vibrancy::*;
 extern crate meval;
 
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
 fn evaluate_expression(expression: &str) -> String {
-    let r = meval::eval_str(expression).unwrap();
-    format!("{}", r)
+    match meval::eval_str(expression) {
+        Ok(result) => format!("{}", result),
+        Err(_) => "Error".to_string(),
+    }
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
