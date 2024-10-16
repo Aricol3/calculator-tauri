@@ -167,7 +167,7 @@ function App() {
           <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
         </div>
       </div>
-      <div className="container pt-4">
+      <div className="calculator-container pt-4">
         <h1>{output}</h1>
         <div className="flex flex-col gap-1">
           <div className="flex gap-1 self-center">

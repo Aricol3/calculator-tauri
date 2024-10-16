@@ -30,7 +30,7 @@
     background: #5bbec3;
 }
 
-.container {
+.calculator-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -42,8 +42,7 @@
     /*-webkit-backdrop-filter: blur(20px);*/
 }
 
-/* App.css */
-.container h1 {
+.calculator-container h1 {
     font-size: 12vh;
     margin: 0;
     padding: 1rem;
