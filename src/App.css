@@ -3,7 +3,19 @@
 @tailwind utilities;
 
 :root {
-    background-color: transparent;
+    /*background-color: transparent;*/
+    background: rgba(33, 33, 33, 0.1);
+
+}
+
+.app-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 5px;
+    overflow: hidden;
 }
 
 .titlebar {

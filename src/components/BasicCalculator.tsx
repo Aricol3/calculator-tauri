@@ -82,7 +82,7 @@ const BasicCalculator = () => {
     <div className="basic-calculator-container pt-4">
       <h1
         ref={outputRef}
-        className="overflow-x-auto whitespace-nowrap text-right text-2xl max-w-full calculator-output"
+        className="overflow-x-auto whitespace-nowrap text-right text-2xl max-w-full"
         style={{ fontSize: getFontSize() }}
       >
         {output}
