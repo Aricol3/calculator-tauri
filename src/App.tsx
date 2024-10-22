@@ -4,9 +4,10 @@ import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@
 import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import DateCalculator from "./components/DateCalculator.tsx";
 
 function App() {
-  const [calc, setCalc] = useState<Boolean>(false);
+  const [calc, setCalc] = useState<Boolean>(true);
   const dropdownRef = useRef<HTMLButtonElement | null>(null);
 
   return (
@@ -19,17 +20,17 @@ function App() {
             variant="bordered"
             className="text-xl"
           >
-            <FontAwesomeIcon icon={faBars}/>
+            <FontAwesomeIcon icon={faBars} />
           </Button>
         </DropdownTrigger>
         <DropdownMenu>
-          <DropdownItem onClick={()=>setCalc(true)}>1</DropdownItem>
-          <DropdownItem onClick={()=>setCalc(false)} className="text-danger" color="danger">
-            2
+          <DropdownItem onClick={() => setCalc(true)}>Basic Calculator</DropdownItem>
+          <DropdownItem onClick={() => setCalc(false)} className="text-danger" color="danger">
+            Date Calculator
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      {calc? <div>???</div>:<BasicCalculator />}
+      {calc ? <BasicCalculator /> : <DateCalculator />}
     </div>
   );
 }

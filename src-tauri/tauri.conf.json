@@ -10,6 +10,7 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "macOSPrivateApi": true,
     "windows": [
       {
         "title": "calculator",
@@ -17,7 +18,7 @@
         "height": 380,
         "resizable": true,
         "transparent": true,
-        "decorations": false
+        "decorations": true
       }
     ],
     "security": {
