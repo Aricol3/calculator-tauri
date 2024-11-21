@@ -3,18 +3,16 @@ import {
   Breadcrumbs,
   Button, Divider
 } from "@nextui-org/react";
-import { useState } from "react";
-import { COLOR, ColorType, VARIANT, VariantType } from "../types.ts";
+import { COLOR, VARIANT } from "../types.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../store.ts";
-import { setButtonColor } from "../slices/settingsSlice.ts";
+import { setButtonColor, setButtonVariant } from "../slices/settingsSlice.ts";
 
 const Settings = () => {
   const dispatch = useDispatch();
-  const [color, setColor] = useState<ColorType>(COLOR.DEFAULT);
-  const [variant, setVariant] = useState<VariantType>(VARIANT.SOLID);
 
-  const settings = useSelector((state: IRootState) => state.settings);
+  const buttonColor = useSelector((state: IRootState) => state.settings.buttonColor);
+  const buttonVariant = useSelector((state: IRootState) => state.settings.buttonVariant);
 
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mt-4">
@@ -60,8 +58,6 @@ const Settings = () => {
       {/*  </DropdownMenu>*/}
       {/*</Dropdown>*/}
 
-      {settings.buttonColor}
-
       <div className="w-full">
         <p className="text-small text-default-500">Colors</p>
         <Divider />
@@ -70,7 +66,6 @@ const Settings = () => {
         size="sm"
         onAction={(key) => {
           // @ts-ignore
-          setColor(key);
           dispatch(setButtonColor(key))
         }}
         classNames={{
@@ -79,28 +74,28 @@ const Settings = () => {
         itemClasses={{
           item: [
             "px-4 py-0.5 border-small border-default-400 rounded-small",
-            `data-[current=true]:border-${color} data-[current=true]:bg-${color === "default" ? "foreground" : color} data-[current=true]:text-background transition-colors`,
+            `data-[current=true]:border-${buttonColor} data-[current=true]:bg-${buttonColor === "default" ? "foreground" : buttonColor} data-[current=true]:text-background transition-colors`,
             "data-[disabled=true]:border-default-400 data-[disabled=true]:bg-default-100"
           ],
           separator: "hidden"
         }}
       >
-        <BreadcrumbItem key={COLOR.DEFAULT} isCurrent={color === COLOR.DEFAULT}>
+        <BreadcrumbItem key={COLOR.DEFAULT} isCurrent={buttonColor === COLOR.DEFAULT}>
           Default
         </BreadcrumbItem>
-        <BreadcrumbItem key={COLOR.PRIMARY} isCurrent={color === COLOR.PRIMARY}>
+        <BreadcrumbItem key={COLOR.PRIMARY} isCurrent={buttonColor === COLOR.PRIMARY}>
           Blue
         </BreadcrumbItem>
-        <BreadcrumbItem key={COLOR.SECONDARY} isCurrent={color === COLOR.SECONDARY}>
+        <BreadcrumbItem key={COLOR.SECONDARY} isCurrent={buttonColor === COLOR.SECONDARY}>
           Purple
         </BreadcrumbItem>
-        <BreadcrumbItem key={COLOR.SUCCESS} isCurrent={color === COLOR.SUCCESS}>
+        <BreadcrumbItem key={COLOR.SUCCESS} isCurrent={buttonColor === COLOR.SUCCESS}>
           Green
         </BreadcrumbItem>
-        <BreadcrumbItem key={COLOR.WARNING} isCurrent={color === COLOR.WARNING}>
+        <BreadcrumbItem key={COLOR.WARNING} isCurrent={buttonColor === COLOR.WARNING}>
           Yellow
         </BreadcrumbItem>
-        <BreadcrumbItem key={COLOR.DANGER} isCurrent={color === COLOR.DANGER}>
+        <BreadcrumbItem key={COLOR.DANGER} isCurrent={buttonColor === COLOR.DANGER}>
           Red
         </BreadcrumbItem>
       </Breadcrumbs>
@@ -113,7 +108,7 @@ const Settings = () => {
         size="sm"
         onAction={(key) => {
           // @ts-ignore
-          setVariant(key);
+          dispatch(setButtonVariant(key))
         }}
         classNames={{
           list: "gap-2"
@@ -121,37 +116,37 @@ const Settings = () => {
         itemClasses={{
           item: [
             "px-4 py-0.5 border-small border-default-400 rounded-small",
-            `data-[current=true]:border-${color} data-[current=true]:bg-${color === "default" ? "foreground" : color} data-[current=true]:text-background transition-colors`,
+            `data-[current=true]:border-${buttonColor} data-[current=true]:bg-${buttonColor === "default" ? "foreground" : buttonColor} data-[current=true]:text-background transition-colors`,
             "data-[disabled=true]:border-default-400 data-[disabled=true]:bg-default-100"
           ],
           separator: "hidden"
         }}
       >
-        <BreadcrumbItem key={VARIANT.SOLID} isCurrent={variant === VARIANT.SOLID}>
+        <BreadcrumbItem key={VARIANT.SOLID} isCurrent={buttonVariant === VARIANT.SOLID}>
           Solid
         </BreadcrumbItem>
-        <BreadcrumbItem key={VARIANT.FADED} isCurrent={variant === VARIANT.FADED}>
+        <BreadcrumbItem key={VARIANT.FADED} isCurrent={buttonVariant === VARIANT.FADED}>
           Faded
         </BreadcrumbItem>
-        <BreadcrumbItem key={VARIANT.BORDERED} isCurrent={variant === VARIANT.BORDERED}>
+        <BreadcrumbItem key={VARIANT.BORDERED} isCurrent={buttonVariant === VARIANT.BORDERED}>
           Bordered
         </BreadcrumbItem>
-        <BreadcrumbItem key={VARIANT.LIGHT} isCurrent={variant === VARIANT.LIGHT}>
+        <BreadcrumbItem key={VARIANT.LIGHT} isCurrent={buttonVariant === VARIANT.LIGHT}>
           Light
         </BreadcrumbItem>
-        <BreadcrumbItem key={VARIANT.FLAT} isCurrent={variant === VARIANT.FLAT}>
+        <BreadcrumbItem key={VARIANT.FLAT} isCurrent={buttonVariant === VARIANT.FLAT}>
           Flat
         </BreadcrumbItem>
-        <BreadcrumbItem key={VARIANT.GHOST} isCurrent={variant === VARIANT.GHOST}>
+        <BreadcrumbItem key={VARIANT.GHOST} isCurrent={buttonVariant === VARIANT.GHOST}>
           Ghost
         </BreadcrumbItem>
-        <BreadcrumbItem key={VARIANT.SHADOW} isCurrent={variant === VARIANT.SHADOW}>
+        <BreadcrumbItem key={VARIANT.SHADOW} isCurrent={buttonVariant === VARIANT.SHADOW}>
           Shadow
         </BreadcrumbItem>
       </Breadcrumbs>
 
       <div className="w-full text-center">
-        <Button color={color} variant={variant}>button</Button>
+        <Button color={buttonColor} variant={buttonVariant}>button</Button>
       </div>
     </div>
   );

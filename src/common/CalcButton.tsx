@@ -1,5 +1,7 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
+import { useSelector } from "react-redux";
+import { IRootState } from "../store.ts";
 
 interface CalcButtonProps {
   onClick: () => void;
@@ -9,6 +11,8 @@ interface CalcButtonProps {
 }
 
 const CalcButton = ({ onClick, children, className, onKeyDown }: CalcButtonProps) => {
+  const settings = useSelector((state: IRootState) => state.settings);
+
   return (
     <Button
       className={`min-w-16 w-17 max-w-18 ${className || ""}`}
@@ -18,6 +22,8 @@ const CalcButton = ({ onClick, children, className, onKeyDown }: CalcButtonProps
       }}
       onKeyDown={onKeyDown}
       radius="sm"
+      color={settings.buttonColor}
+      variant={settings.buttonVariant}
     >
       {children}
     </Button>

@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { COLOR, VARIANT } from "../types.ts";
+import { COLOR, ColorType, VARIANT, VariantType } from "../types.ts";
 
 interface ISettingsState {
-  buttonColor: string,
-  buttonVariant: string,
+  buttonColor: ColorType,
+  buttonVariant: VariantType,
 }
 
 const initialState: ISettingsState = {
@@ -15,8 +15,11 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setButtonColor: (state, action: PayloadAction<any>) => {
+    setButtonColor: (state, action: PayloadAction<ColorType>) => {
       state.buttonColor = action.payload;
+    },
+    setButtonVariant: (state, action: PayloadAction<VariantType>) => {
+      state.buttonVariant = action.payload;
     },
     resetSettings: () => initialState,
   },
@@ -24,6 +27,7 @@ export const settingsSlice = createSlice({
 
 export const {
   setButtonColor,
+  setButtonVariant,
   resetSettings,
 } = settingsSlice.actions;
 export default settingsSlice.reducer;
