@@ -5,10 +5,16 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { COLOR, ColorType, VARIANT, VariantType } from "../types.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../store.ts";
+import { setButtonColor } from "../slices/settingsSlice.ts";
 
 const Settings = () => {
+  const dispatch = useDispatch();
   const [color, setColor] = useState<ColorType>(COLOR.DEFAULT);
   const [variant, setVariant] = useState<VariantType>(VARIANT.SOLID);
+
+  const settings = useSelector((state: IRootState) => state.settings);
 
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mt-4">
@@ -54,6 +60,8 @@ const Settings = () => {
       {/*  </DropdownMenu>*/}
       {/*</Dropdown>*/}
 
+      {settings.buttonColor}
+
       <div className="w-full">
         <p className="text-small text-default-500">Colors</p>
         <Divider />
@@ -63,6 +71,7 @@ const Settings = () => {
         onAction={(key) => {
           // @ts-ignore
           setColor(key);
+          dispatch(setButtonColor(key))
         }}
         classNames={{
           list: "gap-2"
