@@ -1,4 +1,5 @@
-import "./BasicCalculator.css"
+import "./BasicCalculator.css";
+import { getCurrentWindow, LogicalSize } from "@tauri-apps/api/window";
 import { useState, useEffect, useRef } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import CalcButton from "../common/CalcButton.tsx";
@@ -13,6 +14,8 @@ const BasicCalculator = () => {
   }, [output]);
 
   useEffect(() => {
+    getCurrentWindow().setSize(new LogicalSize(280, 420));
+
     const handleKeyDown = async (event: KeyboardEvent) => {
       const { key } = event;
 
@@ -122,7 +125,8 @@ const BasicCalculator = () => {
           <CalcButton onClick={toggleSign}>⁺⁄₋</CalcButton>
           <CalcButton onClick={() => concatNumber(0)}>0</CalcButton>
           <CalcButton onClick={addDot}>.</CalcButton>
-          <CalcButton onClick={evaluateExpression} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
+          <CalcButton onClick={evaluateExpression}
+                      className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
             =
           </CalcButton>
         </div>
