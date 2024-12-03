@@ -66,10 +66,18 @@ const BasicCalculator = () => {
   const concatNumber = (number: number) => setOutput(prev => prev === "0" || prev === "Error" ? number.toString() : prev + number.toString());
   const addDot = () => setOutput(prev => prev.includes(".") ? prev : prev + ".");
   const removeLast = () => setOutput(prev => prev.length > 1 && prev !== "Error" ? prev.slice(0, -1) : "0");
-  const addOperator = (operator: string) => setOutput(prev => prev === "Error" ? "0" : (/\W$/.test(prev) ? prev.slice(0, -1) : prev) + operator);
   const squareRoot = () => setOutput(prev => prev === "Error" ? "0" : `sqrt(${/\W$/.test(prev) ? prev.slice(0, -1) : prev})`);
   const makeFraction = () => setOutput(prev => prev === "Error" ? "0" : `1/(${/\W$/.test(prev) ? prev.slice(0, -1) : prev})`);
   const toggleSign = () => setOutput(prev => prev.startsWith("-") ? prev.slice(1) : "-" + prev);
+  const addOperator = (operator: string) => setOutput(prev => {
+    if (prev === "Error") return "0";
+
+    if (operator === "-" && prev === "0") {
+      return "-";
+    }
+
+    return (/\W$/.test(prev) ? prev.slice(0, -1) : prev) + operator;
+  });
 
   const getFontSize = () => {
     return output.length > 10 ? "1.5em" : "2em";
